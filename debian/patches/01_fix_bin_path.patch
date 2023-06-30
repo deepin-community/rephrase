@@ -1,0 +1,24 @@
+From: Tiago Bortoletto Vaz <tiago@debian.org>
+Subject: Fix binary path in Makefile
+Reviewed-by: Joao Eriberto Mota Filho <eriberto@debian.org>
+Last-Update: 2015-07-13
+
+From: Joao Eriberto Mota Filho <eriberto@debian.org>
+Subject: fix CFLAGS to allow the GCC hardening.
+Last-Update: 2015-07-13
+Index: rephrase-0.2/Makefile
+===================================================================
+--- rephrase-0.2.orig/Makefile
++++ rephrase-0.2/Makefile
+@@ -52,9 +52,9 @@ endif
+ 
+ DEFS		= -DVERSION=\"$(version)\" $(gpg_def) $(cryptsetup_def) $(pattern_max_def) $(args_max_def)
+ CPPFLAGS	+= $(DEFS)
+-CFLAGS		= -Wall
++CFLAGS		+= -Wall
+ 
+-prefix		= /usr/local
++prefix		= /usr
+ exec_prefix	= ${prefix}
+ bindir		= ${exec_prefix}/bin
+ 

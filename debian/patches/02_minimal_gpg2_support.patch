@@ -1,0 +1,25 @@
+Description: Make rephrase working with gpg2
+Author: Axel Beckert <abe@debian.org> after an idea by Daniel Kahn Gillmor <dkg@fifthhorseman.net>
+Bug-Debian: https://bugs.debian.org/853935
+Last-Update: 2017-02-03
+Index: rephrase-0.2/rephrase.c
+===================================================================
+--- rephrase-0.2.orig/rephrase.c
++++ rephrase-0.2/rephrase.c
+@@ -63,14 +63,14 @@ struct profile {
+ struct profile profiles[] = {
+   {
+     "--gpg-key",
+-    { GPG, "--default-key", "%1", "--passphrase-fd", "0", "--batch", "--no-tty", "--dry-run", "--clearsign", "/dev/null", NULL },
++    { GPG, "--pinentry-mode", "loopback", "--default-key", "%1", "--passphrase-fd", "0", "--batch", "--no-tty", "--dry-run", "--clearsign", "/dev/null", NULL },
+     1,
+     0,
+     -1
+   },
+   {
+     "--gpg-symmetric",
+-    { GPG, "--passphrase-fd", "0", "--batch", "--no-tty", "--decrypt", "%1", NULL },
++    { GPG, "--pinentry-mode", "loopback", "--passphrase-fd", "0", "--batch", "--no-tty", "--decrypt", "%1", NULL },
+     1,
+     0,
+     -1
