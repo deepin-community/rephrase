@@ -1,0 +1,19 @@
+Description: Don't try to install files with different owner and permissions
+ This allows us to build it with Rules-Require-Root set to 'no' whereas there's
+ no impact to the resulting package.
+Author: Samuel Henrique <samueloph@debian.org>
+Index: rephrase/Makefile
+===================================================================
+--- rephrase.orig/Makefile
++++ rephrase/Makefile
+@@ -70,8 +70,8 @@ all: $(program)
+ dist: $(what).tar.gz $(what).tar.bz2
+ 
+ install: all
+-	./mkinstalldirs -m $(dirmode) $(DESTDIR)$(bindir)
+-	./install-sh -c -o $(binowner) -g $(bingroup) -m $(binmode) $(program) \
++	./mkinstalldirs $(DESTDIR)$(bindir)
++	./install-sh -c $(program) \
+ 		$(DESTDIR)$(bindir)/$(program)
+ 
+ $(what).tar: $(files)
